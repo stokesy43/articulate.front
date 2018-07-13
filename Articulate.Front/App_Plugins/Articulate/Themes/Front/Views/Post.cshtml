@@ -1,0 +1,140 @@
+﻿@using Articulate;
+@using ClientDependency.Core.Mvc;
+
+@inherits UmbracoViewPage<Articulate.Models.PostModel>
+@{
+    Layout = "Master.cshtml";
+
+    Html.RequiresCss("~/assets/vendor/slick-carousel/slick/slick.css");
+    Html.RequiresCss("~/assets/vendor/dzsparallaxer/dzsparallaxer.css");
+
+    <!-- JS Implementing Plugins -->
+    Html.RequiresJs("~/assets/vendor/slick-carousel/slick/slick.js");
+    Html.RequiresJs("~/assets/vendor/dzsparallaxer/dzsparallaxer.js");
+
+
+}
+
+
+<!-- Hero Section -->
+<div class="dzsparallaxer auto-init height-is-based-on-content use-loading mode-scroll" data-options='{direction: "normal"}'>
+    <!-- Apply your Parallax background image here -->
+    <div class="divimage dzsparallaxer--target" style="height: 130%; background-image: url(@Model.CroppedPostImageUrl);"></div>
+
+    <!-- Content -->
+    <div class="js-scroll-effect position-relative"
+         data-scroll-effect="smoothFadeToBottom">
+        <div class="container u-space-5-top u-space-1-bottom">
+            <div class="text-center w-lg-80 mx-auto u-space-3-bottom">
+                <h1 class="display-4 font-size-48--md-down text-white font-weight-normal mb-0">@Model.Name</h1>
+            </div>
+
+            <!-- Author -->
+            <div class="text-center">
+                <img class="img-fluid u-sm-avatar rounded-circle mb-2" src="@Model.Author.Image" alt="@Model.Author.Name">
+                <span class="d-block">
+                    <a class="text-white h6 mb-0" href="#">@Model.Author.Name</a>
+                </span>
+            </div>
+            <!-- End Author -->
+        </div>
+    </div>
+    <!-- End Content -->
+</div>
+<!-- End Hero Section -->
+<!-- Body Section -->
+<div class="container u-space-3-top">
+    <div class="w-lg-60 mx-auto">
+        <div class="mb-4">
+            <span class="text-muted">@Model.PublishedDate.ToString("MMMM d, yyyy")</span>
+        </div>
+
+        <div class="mb-5">
+            @Model.Body
+        </div>
+    </div>
+</div>
+<!-- End Body Section -->
+
+<!-- Tags, Social & Author Section -->
+<div class="container u-space-3-bottom">
+    <div class="w-lg-60 mx-auto">
+        <!-- Tags -->
+        <ul class="list-inline text-center mb-0">
+            @foreach (var tag in Model.Tags)
+            {
+                <li class="list-inline-item pb-3">
+                    <a class="u-label u-label--xs u-label--secondary" href="@Url.ArticulateTagUrl(Model, tag)">@tag</a>
+                </li>
+            }
+        </ul>
+        <!-- End Tags -->
+
+        <hr class="my-7">
+
+        <!-- Social Networks -->
+        <ul class="list-inline text-center mb-0">
+            <li class="list-inline-item">
+                <a class="u-bg-transparent u-icon u-icon-secondary--air" href="#">
+                    <span class="fab fa-facebook-f u-icon__inner"></span>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="u-bg-transparent u-icon u-icon-secondary--air" href="#">
+                    <span class="fab fa-google u-icon__inner"></span>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="u-bg-transparent u-icon u-icon-secondary--air" href="#">
+                    <span class="fab fa-twitter u-icon__inner"></span>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="u-bg-transparent u-icon u-icon-secondary--air" href="#">
+                    <span class="fab fa-pinterest u-icon__inner"></span>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="u-bg-transparent u-icon u-icon-secondary--air" href="#">
+                    <span class="fab fa-get-pocket u-icon__inner"></span>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="u-bg-transparent u-icon u-icon-secondary--air" href="#">
+                    <span class="fab fa-telegram-plane u-icon__inner"></span>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="u-bg-transparent u-icon u-icon-secondary--air" href="#">
+                    <span class="fab fa-slack-hash u-icon__inner"></span>
+                </a>
+            </li>
+        </ul>
+        <!-- End Social Networks -->
+
+        <hr class="my-7">
+
+        <!-- Author -->
+        <div class="media">
+            <div class="d-flex mr-3">
+                <img class="img-fluid u-md-avatar rounded-circle" src="@Model.Author.Image" alt="@Model.Author.Name">
+            </div>
+            <div class="media-body">
+                <div class="row mb-3 mb-sm-0">
+                    <div class="col-sm-9 mb-2">
+                        <h4 class="d-inline-block mb-0">
+                            <a class="d-block h6 mb-0" href="#">@Model.Author.Name</a>
+                        </h4>
+                        <small class="d-block text-muted"><a href="@Model.Author.BlogUrl">@Model.Author.BlogUrl</a></small>
+                    </div>
+                    <div class="col-sm-3 text-sm-right">
+                        <button type="button" class="btn btn-xs u-btn-primary--air font-weight-bold transition-3d-hover">Follow</button>
+                    </div>
+                </div>
+                <p class="small">@Model.Author.Bio</p>
+            </div>
+        </div>
+        <!-- End Author -->
+    </div>
+</div>
+<!-- End Tags, Social & Author Section -->

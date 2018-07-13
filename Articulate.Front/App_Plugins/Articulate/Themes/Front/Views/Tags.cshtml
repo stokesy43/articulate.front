@@ -1,0 +1,89 @@
+﻿@using Articulate.Models
+@using ClientDependency.Core.Mvc
+
+@inherits UmbracoViewPage<Articulate.Models.TagListModel>
+@{
+    Layout = "Master.cshtml";
+
+    Html.RequiresCss("~/assets/vendor/dzsparallaxer/dzsparallaxer.css");
+
+    Html.RequiresJs("~/assets/vendor/dzsparallaxer/dzsparallaxer.js");
+}
+
+<!-- Hero Section -->
+<div class="dzsparallaxer auto-init height-is-based-on-content use-loading mode-scroll" data-options='{direction: "normal"}'>
+    <!-- Apply your Parallax background image here -->
+    <div class="divimage dzsparallaxer--target" style="height: 130%; background-image: url('@Model.BlogBanner')"></div>
+
+    <!-- Content -->
+    <div class="container u-space-3">
+        <div class="text-center w-lg-80 mx-auto">
+            <h1 class="text-white display-1 font-size-48--md-down font-weight-bold">@Model.Name</h1>
+        </div>
+
+        <div class="text-center w-lg-40 mx-auto">
+            
+        </div>
+    </div>
+    <!-- End Content -->
+</div>
+<!-- End Hero Section -->
+
+<div class="container u-space-3">
+    <div id="tagsAccordion">
+
+        @foreach (var tag in Model.Tags)
+        {
+
+            <div class="card mb-3">
+                <div class="card-header u-card-header" id="tags_header_@tag.TagName">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link btn-block d-flex justify-content-between u-card-btn collapsed p-3"
+                                data-toggle="collapse"
+                                data-target="#tags_body_@tag.TagName"
+                                aria-expanded="false"
+                                aria-controls="tags_body_@tag.TagName">
+                            @tag.TagName
+
+                            <span class="u-card-btn__arrow">
+                                <span class="fa fa-arrow-down small"></span>
+                            </span>
+                        </button>
+                    </h5>
+                </div>
+                <div id="tags_body_@tag.TagName" class="collapse"
+                     aria-labelledby="tags_header_@tag.TagName"
+                     data-parent="#tagsAccordion">
+                    <div class="card-body u-card-body">
+                        <div class="row">
+                            @foreach (var post in tag.Posts.OrderByDescending(x => x.PublishedDate))
+                            {
+                                <div class="col-lg-4 mb-5 mb-lg-0">
+                                    <article>
+                                        <div class="media mb-1">
+                                            <div class="d-flex mr-3">
+                                                <img class="img-fluid rounded u-avatar" src="@post.CroppedPostImageUrl" alt="@post.Name">
+                                            </div>
+                                            <div class="media-body">
+                                                <h4 class="h6 font-weight-normal mb-0">
+                                                    <a href="@post.Url">
+                                                        @post.Name
+                                                    </a>
+                                                </h4>
+                                                <small class="d-block">@post.Excerpt</small>
+                                                <h4 class="h6 font-weight-normal mb-0"></h4>
+                                            </div>
+                                        </div>
+                                    </article>
+
+                                </div>
+
+                            }
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

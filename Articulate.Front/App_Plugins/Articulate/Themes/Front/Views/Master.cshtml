@@ -1,0 +1,370 @@
+﻿@using ClientDependency.Core.Mvc;
+@using Articulate;
+@model Articulate.Models.IMasterModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Title -->
+    <title>@Model.PageTitle</title>
+
+    <!-- Required Meta Tags Always Come First -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    @Html.MetaTags(Model)
+    @Html.SocialMetaTags(Model)
+    @Html.AdvertiseWeblogApi(Model)
+    @Html.RssFeed(Model)
+    @Html.RenderOpenSearch(Model)
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="~/favicon.ico">
+
+    @{
+        Html
+            .RequiresCss("//fonts.googleapis.com/css?family=Poppins:300,400,500,600")
+            .RequiresCss("~/assets/vendor/bootstrap/css/bootstrap.css")
+            .RequiresCss("~/assets/vendor/font-awesome/css/fontawesome-all.min.css")
+            .RequiresCss("~/assets/vendor/animate.css/animate.min.css")
+            .RequiresCss("~/assets/vendor/hs-megamenu/src/hs.megamenu.css")
+            .RequiresCss("~/assets/css/front.css");
+
+
+        Html.RequiresCss("~/assets/vendor/slick-carousel/slick/slick.css")
+            .RequiresCss("~/assets/vendor/fancybox/jquery.fancybox.css")
+            .RequiresCss("~/assets/vendor/custombox/dist/custombox.min.css");
+
+
+        <!-- JS Global Compulsory -->
+        Html.RequiresJs("~/assets/vendor/jquery/dist/jquery.min.js", 1)
+            .RequiresJs("~/assets/vendor/jquery-migrate/dist/jquery-migrate.min.js", 1)
+            .RequiresJs("~/assets/vendor/popper.js/dist/umd/popper.min.js", 1)
+            .RequiresJs("~/assets/vendor/bootstrap/bootstrap.min.js", 1);
+
+        <!-- JS Implementing Plugins -->
+        Html.RequiresJs("~/assets/vendor/custombox/dist/custombox.min.js")
+            .RequiresJs("~/assets/vendor/fancybox/jquery.fancybox.min.js")
+            .RequiresJs("~/assets/vendor/slick-carousel/slick/slick.js")
+            .RequiresJs("~/assets/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js")
+            .RequiresJs("~/assets/vendor/hs-megamenu/src/hs.megamenu.js")
+            .RequiresJs("~/assets/vendor/jquery-validation/dist/jquery.validate.min.js");
+
+        <!-- JS Front -->
+        Html.RequiresJs("~/assets/js/hs.core.js")
+            .RequiresJs("~/assets/js/components/hs.header.js")
+            .RequiresJs("~/assets/js/components/hs.unfold.js")
+            .RequiresJs("~/assets/js/helpers/hs.focus-state.js")
+            .RequiresJs("~/assets/js/components/hs.validation.js")
+            .RequiresJs("~/assets/js/components/hs.fancybox.js")
+            .RequiresJs("~/assets/js/components/hs.slick-carousel.js")
+            .RequiresJs("~/assets/js/components/hs.modal-window.js")
+            .RequiresJs("~/assets/js/components/hs.cubeportfolio.js")
+            .RequiresJs("~/assets/js/components/hs.go-to.js");
+    }
+
+    @Html.RenderCssHere()
+
+</head>
+
+<body>
+    <!-- Skippy -->
+    <a id="skippy" class="sr-only sr-only-focusable u-skippy" href="#content">
+        <div class="container">
+            <span class="u-skiplink-text">Skip to main content</span>
+        </div>
+    </a>
+    <!-- End Skippy -->
+    <!-- ========== HEADER ========== -->
+    <header id="header" class="u-header"
+            data-header-fix-moment="500"
+            data-header-fix-effect="slide">
+        <!-- Search -->
+        <div id="searchPushTop" class="u-search-push-top">
+            <div class="container position-relative">
+                <div class="u-search-push-top__content mx-auto">
+                    <!-- Close Button -->
+                    <button type="button" class="close u-search-push-top__close-btn"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                            aria-controls="searchPushTop"
+                            data-unfold-type="jquery-slide"
+                            data-unfold-target="#searchPushTop">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <!-- End Close Button -->
+                    <!-- Input -->
+                    <form class="js-focus-state input-group input-group-lg u-form u-form--lg u-form--no-brd">
+                        <input type="search" class="form-control u-form__input" placeholder="Search Front" aria-label="Search Front">
+                        <div class="input-group-append">
+                            <button type="button" class="btn btn-primary u-btn-primary">Search</button>
+                        </div>
+                    </form>
+                    <!-- End Input -->
+                    <!-- Link Lists -->
+                    <div class="row d-none d-md-flex mt-7">
+                        <div class="col-sm-6">
+                            <strong class="d-block mb-2">Quick Links</strong>
+
+                            <div class="row">
+                                <!-- List -->
+                                <ul class="col-sm-6 list-unstyled u-list">
+                                    <li>
+                                        <a class="u-list__link" href="#">
+                                            <span class="fa fa-angle-right u-list__link-icon mr-1"></span>
+                                            Search Results List
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="u-list__link" href="#">
+                                            <span class="fa fa-angle-right u-list__link-icon mr-1"></span>
+                                            Search Results Grid
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="u-list__link" href="../pages/about-agency.html">
+                                            <span class="fa fa-angle-right u-list__link-icon mr-1"></span>
+                                            About
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="u-list__link" href="../pages/services-agency.html">
+                                            <span class="fa fa-angle-right u-list__link-icon mr-1"></span>
+                                            Services
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="u-list__link" href="#">
+                                            <span class="fa fa-angle-right u-list__link-icon mr-1"></span>
+                                            Invoice
+                                        </a>
+                                    </li>
+                                </ul>
+                                <!-- End List -->
+                                <!-- List -->
+                                <ul class="col-sm-6 list-unstyled u-list">
+                                    <li>
+                                        <a class="u-list__link" href="#">
+                                            <span class="fa fa-angle-right u-list__link-icon mr-1"></span>
+                                            Profile
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="u-list__link" href="#">
+                                            <span class="fa fa-angle-right u-list__link-icon mr-1"></span>
+                                            User Contacts
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="u-list__link" href="#">
+                                            <span class="fa fa-angle-right u-list__link-icon mr-1"></span>
+                                            Reviews
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="u-list__link" href="#">
+                                            <span class="fa fa-angle-right u-list__link-icon mr-1"></span>
+                                            Settings
+                                        </a>
+                                    </li>
+                                </ul>
+                                <!-- End List -->
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <!-- Banner -->
+                            <div class="rounded u-search-push-top__banner">
+                                <div class="d-flex align-items-center">
+                                    <div class="u-search-push-top__banner-container">
+                                        <img class="img-fluid u-search-push-top__banner-img" src="../../assets/img/mockups/img3.png" alt="Image Description">
+                                        <img class="img-fluid u-search-push-top__banner-img" src="../../assets/img/mockups/img2.png" alt="Image Description">
+                                    </div>
+
+                                    <div>
+                                        <div class="mb-4">
+                                            <strong class="d-block mb-2">Featured Item</strong>
+                                            <p>Create astonishing web sites and pages.</p>
+                                        </div>
+                                        <a class="btn btn-xs u-btn-success--air transition-3d-hover" href="index.html">Apply Now <span class="fa fa-angle-right ml-2"></span></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Banner -->
+                        </div>
+                    </div>
+                    <!-- End Link Lists -->
+                </div>
+            </div>
+        </div>
+        <!-- End Search -->
+
+        <div class="u-header__section">
+            <!-- Topbar -->
+            <div class="container u-header__hide-content pt-2">
+                <div class="d-flex align-items-center mb-0">
+                    <div class="ml-auto">
+
+                    </div>
+
+                    <ul class="list-inline ml-2 mb-0">
+                        <!-- Search -->
+                        <li class="list-inline-item">
+                            <a class="btn btn-xs u-btn--icon u-btn-text-secondary" href="javascript:;" role="button"
+                               aria-haspopup="true"
+                               aria-expanded="false"
+                               aria-controls="searchPushTop"
+                               data-unfold-type="jquery-slide"
+                               data-unfold-target="#searchPushTop">
+                                <span class="fa fa-search u-btn--icon__inner"></span>
+                            </a>
+                        </li>
+                        <!-- End Search -->
+                    </ul>
+                </div>
+            </div>
+            <!-- End Topbar -->
+
+            <div id="logoAndNav" class="container">
+                <!-- Nav -->
+                <nav class="js-mega-menu navbar navbar-expand-md u-header__navbar">
+                    <!-- Logo -->
+                    <a class="navbar-brand u-header__navbar-brand u-header__navbar-brand-top-space" href="/" aria-label="Articulate">
+                        <img src="~/assets/svg/logos/logo.svg" alt="Logo">
+                    </a>
+                    <!-- End Logo -->
+                    <!-- Responsive Toggle Button -->
+                    <button type="button" class="navbar-toggler btn u-hamburger"
+                            aria-label="Toggle navigation"
+                            aria-expanded="false"
+                            aria-controls="navBar"
+                            data-toggle="collapse"
+                            data-target="#navBar">
+                        <span id="hamburgerTrigger" class="u-hamburger__box">
+                            <span class="u-hamburger__inner"></span>
+                        </span>
+                    </button>
+                    <!-- End Responsive Toggle Button -->
+                    <!-- Navigation -->
+                    <div id="navBar" class="collapse navbar-collapse py-0">
+                        <ul class="navbar-nav u-header__navbar-nav ml-lg-auto">
+                            <!-- Example - Link -->
+                            <li class="nav-item">
+                                <a class="nav-link u-header__nav-link" href="#">
+                                    Example Nav Link
+                                </a>
+                            </li>
+                            <!-- End Example - Link -->
+                            <!-- Button -->
+                            <li class="nav-item d-none d-md-inline-block pl-3 pr-0">
+                                <a class="btn btn-sm btn-primary u-btn-primary transition-3d-hover" href="https://themes.getbootstrap.com/product/front-multipurpose-responsive-template/" target="_blank">
+                                    Buy Now
+                                </a>
+                            </li>
+                            <!-- End Button -->
+                        </ul>
+                    </div>
+                    <!-- End Navigation -->
+                </nav>
+                <!-- End Nav -->
+            </div>
+        </div>
+    </header>
+    <!-- ========== END HEADER ========== -->
+    <!-- ========== MAIN ========== -->
+    <main id="content" role="main">
+        @RenderBody()
+    </main>
+    <!-- ========== END MAIN ========== -->
+    <!-- ========== FOOTER ========== -->
+    <footer class="position-relative bg-primary text-center">
+        <div class="container">
+            <!-- Copyright -->
+            <div class="u-space-1">
+                <p class="small u-text-light mb-0">&copy; Front. 2018 Htmlstream. All rights reserved.</p>
+            </div>
+            <!-- End Copyright -->
+            <!-- Go To Top -->
+            <div class="text-center mx-auto">
+                <a class="js-go-to" href="javascript:;"
+                   data-type="absolute"
+                   data-position='{
+             "bottom": 56
+           }'
+                   data-compensation="#header"
+                   data-show-effect="slideInUp"
+                   data-hide-effect="slideOutDown">
+
+                    <div class="u-go-to-wave">
+                        <!-- SVG Wave Shape -->
+                        <figure>
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                 viewBox="0 0 208 44" style="enable-background:new 0 0 208 44;" xml:space="preserve">
+                            <path class="u-fill-primary" d="M0,43c0,0,22.9,2.2,54-18.7S95.1,1.5,95.1,1.5s11.2-3.5,20.1,0.1s10.4,3.7,19.2,9.3c7.7,4.8,15,10.1,22.8,14.9
+                  c10.1,6.2,21.5,11.7,33,14.8C191.6,41,208,44,208,43c0,0,0,1,0,1H0V43z" />
+
+
+
+
+
+
+
+              </svg>
+                        </figure>
+                        <!-- End SVG Wave Shape -->
+
+                        <span class="fa fa-angle-double-up text-white u-go-to-wave__icon"></span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <!-- End Go To Top -->
+    </footer>
+    <!-- ========== END FOOTER ========== -->
+
+    @Html.RenderJsHere();
+
+
+    <!-- JS Plugins Init. -->
+    <script>
+        $(window).on('load', function () {
+            // initialization of HSMegaMenu component
+            $('.js-mega-menu').HSMegaMenu({
+                event: 'hover',
+                pageContainer: $('.container'),
+                breakpoint: 768,
+                hideTimeOut: 0
+            });
+        });
+
+        $(document).on('ready', function () {
+            // initialization of header
+            $.HSCore.components.HSHeader.init($('#header'));
+
+            // initialization of unfold component
+            $.HSCore.components.HSUnfold.init($('[data-unfold-target]'));
+
+            // initialization of forms
+            $.HSCore.helpers.HSFocusState.init();
+
+            // initialization of form validation
+            $.HSCore.components.HSValidation.init('.js-validate');
+
+            // initialization of fancybox
+            $.HSCore.components.HSFancyBox.init('.js-fancybox');
+
+            // initialization of slick carousel
+            $.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
+
+            // initialization of cubeportfolio
+            $.HSCore.components.HSCubeportfolio.init('.cbp');
+
+            // initialization of go to
+            $.HSCore.components.HSGoTo.init('.js-go-to');
+        });
+    </script>
+
+
+</body>
+</html>

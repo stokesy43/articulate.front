@@ -1,0 +1,42 @@
+﻿@using Articulate
+
+@inherits Umbraco.Web.Mvc.UmbracoViewPage<Articulate.Models.PostModel>
+
+<!-- Item -->
+<div class="cbp-item">
+    <div class="cbp-caption">
+        <!-- Blog Card -->
+        <article>
+            <img class="img-fluid w-100" src="@Model.CroppedPostImageUrl" alt="@Model.Name">
+
+            <div class="bg-white rounded-bottom p-5">
+                <!-- Post Info -->
+                <ul class="list-inline small text-muted mb-1">
+                    <li class="list-inline-item mr-0">@Model.Author.Name</li>
+                    <li class="list-inline-item mx-2">&#8211;</li>
+                    <li class="list-inline-item">@Model.PublishedDate.ToString("MMMM d, yyyy")</li>
+                </ul>
+                <!-- End Post Info -->
+                <!-- Info -->
+                <div class="mb-4">
+                    <h3 class="h5 mb-0">
+                        <a href="@Model.Url">@Model.Name</a>
+                    </h3>
+                </div>
+                <!-- End Info -->
+                <!-- Labels -->
+                <ul class="list-inline mb-0">
+                    @foreach (var tag in Model.Tags)
+                    {
+                        <li class="list-inline-item g-mb-10">
+                            <a class="u-label u-label--sm u-label--primary" href="@Url.ArticulateTagUrl(Model, tag)">@tag</a>
+                        </li>
+                    }                    
+                </ul>
+                <!-- End Labels -->
+            </div>
+        </article>
+        <!-- End Blog Card -->
+    </div>
+</div>
+<!-- End Item -->

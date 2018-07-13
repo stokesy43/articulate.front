@@ -1,0 +1,99 @@
+@using Articulate
+@using ClientDependency.Core.Mvc;
+
+@inherits UmbracoViewPage<Articulate.Models.ListModel>
+@{
+    Layout = "Master.cshtml";
+
+    Html.RequiresCss("~/assets/vendor/cubeportfolio/css/cubeportfolio.min.css", 2);
+    Html.RequiresCss("~/assets/vendor/slick-carousel/slick/slick.css");
+    Html.RequiresCss("~/assets/vendor/dzsparallaxer/dzsparallaxer.css");
+
+    Html.RequiresJs("~/assets/vendor/cubeportfolio/js/jquery.cubeportfolio.min.js", 2);
+    Html.RequiresJs("~/assets/vendor/slick-carousel/slick/slick.js");
+    Html.RequiresJs("~/assets/vendor/dzsparallaxer/dzsparallaxer.js");
+
+
+}
+
+<!-- Hero Section -->
+<div class="dzsparallaxer auto-init height-is-based-on-content use-loading mode-scroll" data-options='{direction: "normal"}'>
+    <!-- Apply your Parallax background image here -->
+    <div class="divimage dzsparallaxer--target" style="height: 130%; background-image: url('@Model.BlogBanner')"></div>
+
+    <!-- Content -->
+    <div class="container u-space-3">
+        <div class="text-center w-lg-80 mx-auto">
+            <h1 class="text-white display-1 font-size-48--md-down font-weight-bold">@Model.BlogTitle</h1>
+        </div>
+
+        <div class="text-center w-lg-40 mx-auto">
+            <p class="lead u-text-light">@Model.BlogDescription</p>
+        </div>
+    </div>
+    <!-- End Content -->
+</div>
+<!-- End Hero Section -->
+<!-- Cubeportfolio News Section -->
+<div class="u-bg-light-blue-50">
+    <div class="container u-cubeportfolio u-space-3">
+        <!-- Content -->
+        <div class="cbp mb-7"
+             data-layout="mosaic"
+             data-animation="quicksand"
+             data-x-gap="30"
+             data-y-gap="30"
+             data-media-queries='[
+              {"width": 1500, "cols": 3},
+              {"width": 1100, "cols": 3},
+              {"width": 800, "cols": 3},
+              {"width": 480, "cols": 1}
+          ]'>
+
+            @foreach (var post in Model.Posts)
+            {
+                @Html.ThemedPartial(Model, "ListPost", post)
+            }
+
+
+        </div>
+        <!-- End Content -->
+        <!-- Load More Button -->
+        <div class="text-center">
+            <a href="javascript:;" onclick="getMoreArticles()" class="cbp-l-loadMore-link u-link" rel="nofollow">
+                <span class="cbp-l-loadMore-defaultText">
+                    Load More
+                    <span class="u-link__icon ml-1">
+                        <span class="u-link__icon-inner">&#43;</span>
+                    </span>
+                </span>
+                <span class="cbp-l-loadMore-loadingText">Loading...</span>
+
+            </a>
+            <span class="cbp-l-loadMore-noMoreLoading">No more articles</span>
+        </div>
+
+    </div>
+</div>
+<!-- End Cubeportfolio News Section -->
+
+<script>
+    var page = 1;
+
+    function getMoreArticles() {
+        $.get('/umbraco/articulate/ArticulateFront/getposts/@Model.RootBlogNode.Id?page=' + ++page,
+            function(data) {
+                if (data) {
+                    $(".cbp").cubeportfolio('append', data);
+
+                    if (page >= @Model.Pages.TotalPages) {
+                        $('.cbp-l-loadMore-link').hide();
+                        $('.cbp-l-loadMore-noMoreLoading').show();
+                    }
+                } else {
+                    $('.cbp-l-loadMore-link').hide();
+                    $('.cbp-l-loadMore-noMoreLoading').show();
+                }
+            });
+    }
+</script>
